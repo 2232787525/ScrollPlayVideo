@@ -1,5 +1,5 @@
 # ScrollPlayVideo      
-![image](https://github.com/czhen09/ScrollPlayVideo/blob/master/Resource/ScrollPlayVideo.gif)       
+![image](https://github.com/2232787525/ScrollPlayVideo/blob/master/自动播放.gif)
 ## 核心代码     
 	- (void)filterShouldPlayCellWithScrollDirection:(BOOL)isScrollDownward
 	{
