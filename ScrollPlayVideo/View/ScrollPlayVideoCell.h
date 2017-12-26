@@ -16,7 +16,6 @@
 @end
 @interface ScrollPlayVideoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *topblackView;
-@property (weak, nonatomic) IBOutlet UIView *bottomBlackView;
 @property (weak, nonatomic) IBOutlet UILabel *lab;
 
 @property (weak, nonatomic) IBOutlet UIView *videoFirstImageView;

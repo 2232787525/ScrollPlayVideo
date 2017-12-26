@@ -123,7 +123,6 @@ static NSString *cellIdentify = @"ScrollPlayVideoCell";
 #pragma mark - ScrollPlayVideoCellDelegate
 - (void)playerTapActionWithIsShouldToHideSubviews:(BOOL)isHide{
     ScrollPlayVideoCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.lastOrCurrentPlayIndex inSection:0]];
-    cell.bottomBlackView.hidden = !isHide;
 }
 
 - (void)playButtonClick:(UIButton *)sender{
@@ -409,7 +408,6 @@ static NSString *cellIdentify = @"ScrollPlayVideoCell";
     self.lastOrCurrentPlayIndex = cell.row;
     self.lastPlayCell = cell.row;
     cell.topblackView.hidden = YES;
-    cell.bottomBlackView.hidden = YES;
 
 }
 
