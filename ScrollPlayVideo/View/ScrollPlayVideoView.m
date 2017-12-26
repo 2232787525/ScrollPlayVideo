@@ -15,7 +15,7 @@
 #import "XLVideoPlayer.h"
 
 #define videoListUrl @"http://c.3g.163.com/nc/video/list/VAP4BFR16/y/0-10.html"
-#define cellHeigh 300
+#define cellHeigh 320
 
 
 static NSString *cellIdentify = @"ScrollPlayVideoCell";
@@ -50,20 +50,6 @@ static NSString *cellIdentify = @"ScrollPlayVideoCell";
     return self;
 }
 
-//TODO:播放结束的回调方法
--(void)SBPlayerItemDidPlayToEndTimeNotification:(NSNotification *)notification{
-    NSLog(@"滑动到下一个视频 %f",self.tableView.contentOffset.y + cellHeigh);
-    
-    if (self.lastPlayCell != self.dataArray.count-1) {
-        
-        if(self.tableView.contentOffset.y + cellHeigh + self.tableView.frame.size.height + 1 >= self.tableView.contentSize.height){
-            [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - cellHeigh -self.tableView.frame.size.height) animated:YES];
-
-        }else{
-            [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + cellHeigh) animated:YES];
-        }
-    }
-}
 
 #pragma mark - Private Methods
 
@@ -382,16 +368,23 @@ static NSString *cellIdentify = @"ScrollPlayVideoCell";
     _player = [[XLVideoPlayer alloc] init];
     _player.completedPlayingBlock = ^(XLVideoPlayer *player) {
         
+        NSLog(@"两个比较 %f%d",weakSelf.tableView.contentOffset.y  + weakSelf.tableView.frame.size.height,(int)weakSelf.tableView.contentSize.height );
+        
         if (weakSelf.lastPlayCell != weakSelf.dataArray.count-1) {
-            if(weakSelf.tableView.contentOffset.y + cellHeigh + weakSelf.tableView.frame.size.height + 1 >= weakSelf.tableView.contentSize.height){
+            
+            if(weakSelf.tableView.contentOffset.y  + weakSelf.tableView.frame.size.height  == (int)weakSelf.tableView.contentSize.height ){
+                
+                [weakSelf playNext];
+
+            }else if(weakSelf.tableView.contentOffset.y  + weakSelf.tableView.frame.size.height + cellHeigh > (int)weakSelf.tableView.contentSize.height ){
+                
                 [weakSelf.tableView setContentOffset:CGPointMake(0, weakSelf.tableView.contentSize.height  -weakSelf.tableView.frame.size.height) animated:YES];
                 
                 NSLog(@"滑动到最后一个视频 %f",weakSelf.tableView.contentSize.height  -weakSelf.tableView.frame.size.height);
 
-            }else{
-                [weakSelf.tableView setContentOffset:CGPointMake(0, weakSelf.tableView.contentOffset.y + cellHeigh) animated:YES];
+            }else {
+                [weakSelf.tableView setContentOffset:CGPointMake(0, weakSelf.tableView.contentOffset.y + cellHeigh ) animated:YES];
                 NSLog(@"滑动到下一个视频 %f",weakSelf.tableView.contentOffset.y + cellHeigh);
-
             }
         }
         [beplayer setStatusBarHidden:NO];
@@ -408,7 +401,6 @@ static NSString *cellIdentify = @"ScrollPlayVideoCell";
     self.lastOrCurrentPlayIndex = cell.row;
     self.lastPlayCell = cell.row;
     cell.topblackView.hidden = YES;
-
 }
 
 
