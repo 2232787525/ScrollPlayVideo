@@ -1,5 +1,5 @@
 # 基于XLVideoPlayer的自动滚动视频播放
-![image](https://github.com/2232787525/ScrollPlayVideo/blob/master/自动播放.gif)
+![image](https://github.com/2232787525/ScrollPlayVideo/blob/master/QQ20180111-141627-HD.gif)
 ## 核心代码
 
 ### 判断显示中的cell哪个是最佳的显示位置
